@@ -1,12 +1,18 @@
 package com.devnaldo.tqi_evolution_backend_2021.models;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
+@RequiredArgsConstructor
 public class Cliente {
 
         @Id
