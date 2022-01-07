@@ -3,32 +3,41 @@ package com.devnaldo.tqi_evolution_backend_2021.models;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
+
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@RequiredArgsConstructor
-public class Cliente {
 
+public class ClienteModel implements Serializable {
+
+        private static final long serialVersionUID = 1L;
         @Id
         @GeneratedValue(strategy= GenerationType.AUTO)
-        private Integer id;
+        private Long id;
 
         @Column(nullable = false, length = 50)
+        @NotNull(message = "Por favor, informe o nome")
         private String nome;
 
-        @Column(nullable = false, length = 250)
+        @Column(nullable = false, length = 50, unique = true)
+        @Email(message = "email deve ser válido")
         private String email;
 
-        @Column(nullable = false, length = 11)
+        @Column(nullable = false, length = 11, unique = true)
+        @Size(min = 11, message = "11 dígitos deve conter o CPF")
         private String cpf;
 
         @Column(nullable = false, length = 11)
+        @Size(min = 11, message = "11 dígitos deve conter o RG")
         private String rg;
 
         @Column(nullable = false, length = 50)
@@ -51,4 +60,6 @@ public class Cliente {
 
         @Column(nullable = false, length = 10)
         private String senha;
+
+
 }

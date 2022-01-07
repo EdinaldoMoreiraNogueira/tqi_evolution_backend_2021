@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @ResponseStatus(HttpStatus.NOT_FOUND)
 public class ClienteNaoCadastradoException extends Exception {
 
-    public ClienteNaoCadastradoException(Integer id){
+    public ClienteNaoCadastradoException(Long id){
         super("Cliente com id: " + id + " não encontrado!!");
     }
 }

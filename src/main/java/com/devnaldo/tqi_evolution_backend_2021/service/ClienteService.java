@@ -1,7 +1,7 @@
 package com.devnaldo.tqi_evolution_backend_2021.service;
 
 import com.devnaldo.tqi_evolution_backend_2021.exception.ClienteNaoCadastradoException;
-import com.devnaldo.tqi_evolution_backend_2021.models.Cliente;
+import com.devnaldo.tqi_evolution_backend_2021.models.ClienteModel;
 import com.devnaldo.tqi_evolution_backend_2021.repository.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,24 +20,24 @@ public class ClienteService {
         this.clienteRepository = clienteRepository;
     }
 
-    public List<Cliente> listarClientes() {
+    public List<ClienteModel> listarClientes() {
 
         return clienteRepository.findAll();
 
     }
 
-    public Cliente listarClientePorId(Integer id) throws ClienteNaoCadastradoException {
+    public ClienteModel listarClientePorId(Long id) throws ClienteNaoCadastradoException {
 
-        Cliente cliente = clienteRepository.findById(id).orElseThrow(() -> new ClienteNaoCadastradoException(id));
+        ClienteModel cliente = clienteRepository.findById(id).orElseThrow(() -> new ClienteNaoCadastradoException(id));
         return cliente;
     }
 
-    public Cliente salvar(Cliente cliente) {
+    public ClienteModel salvar(ClienteModel cliente) {
 
         return clienteRepository.save(cliente);
     }
 
-    public Cliente modificar(Integer id, Cliente cliente) throws ClienteNaoCadastradoException {
+    public ClienteModel modificar(Long id, ClienteModel cliente) throws ClienteNaoCadastradoException {
 
         clienteRepository.findById(id).orElseThrow(() -> new ClienteNaoCadastradoException(id));
         cliente.setId(id);
@@ -45,7 +45,7 @@ public class ClienteService {
         return clienteRepository.save(cliente);
     }
 
-    public void deletar(Integer id) throws ClienteNaoCadastradoException{
+    public void deletar(Long id) throws ClienteNaoCadastradoException{
         clienteRepository.deleteById(id);
     }
 

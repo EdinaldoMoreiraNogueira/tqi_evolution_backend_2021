@@ -1,17 +1,20 @@
 package com.devnaldo.tqi_evolution_backend_2021.service;
 
 import com.devnaldo.tqi_evolution_backend_2021.exception.AnaliseCreditoNaoCadastradoException;
-import com.devnaldo.tqi_evolution_backend_2021.models.AnaliseCredito;
+import com.devnaldo.tqi_evolution_backend_2021.models.AnaliseCreditoModel;
 import com.devnaldo.tqi_evolution_backend_2021.repository.AnaliseCreditoRepository;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
+
 
 import java.util.List;
 import java.util.Optional;
 
 @Component
+@Data
+@NoArgsConstructor
 public class AnaliseCreditoService {
 
     private AnaliseCreditoRepository analiseCreditoRepository;
@@ -20,24 +23,25 @@ public class AnaliseCreditoService {
     public AnaliseCreditoService(AnaliseCreditoRepository analiseCreditoRepository){
         this.analiseCreditoRepository = analiseCreditoRepository;
     }
-    public List<AnaliseCredito> listarAnalises(){
+    public List<AnaliseCreditoModel> listarAnalises(){
         return analiseCreditoRepository.findAll();
     }
 
-    public AnaliseCredito listarAnaliseCreditoPorID(Long id){
+    public AnaliseCreditoModel listarAnaliseCreditoPorID(Long id){
 
-        Optional<AnaliseCredito> findById = analiseCreditoRepository.findById(id);
+        Optional<AnaliseCreditoModel> findById = analiseCreditoRepository.findById(id);
 
         return findById.get();
 
     }
 
-    public AnaliseCredito solicitar(@RequestBody AnaliseCredito analiseCredito) {
+    public AnaliseCreditoModel solicitar(AnaliseCreditoModel analiseCredito) {
+
 
         return analiseCreditoRepository.save(analiseCredito);
     }
 
-    public AnaliseCredito atualizar(@PathVariable Long id, @RequestBody AnaliseCredito analiseCredito) throws AnaliseCreditoNaoCadastradoException {
+    public AnaliseCreditoModel atualizar(Long id, AnaliseCreditoModel analiseCredito) throws AnaliseCreditoNaoCadastradoException {
 
         analiseCreditoRepository.findById(id).orElseThrow(() -> new AnaliseCreditoNaoCadastradoException(id));
         analiseCredito.setId(id);
